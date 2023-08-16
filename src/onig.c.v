@@ -17,7 +17,7 @@ module onig
 #flag @VROOT/libonig/ascii.o
 #flag @VROOT/libonig/utf8.o
 #include "oniguruma.h"
-#include "regint.h"
+// #include "regint.h"
 
 [typedef]
 struct C.OnigRegion {

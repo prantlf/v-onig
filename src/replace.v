@@ -9,7 +9,7 @@ pub fn (mut r RegEx) replace(s string, with string, opt u32) !string {
 	mut pos := 0
 	mut last := 0
 	stop := s.len
-	mut end := unsafe { s.str + stop }
+	end := unsafe { s.str + stop }
 	for {
 		res := C.onig_search(r.re, s.str, end, unsafe { s.str + pos }, end, rg, u32(opt))
 		if res >= 0 {
