@@ -128,8 +128,8 @@ b.measure('regex unamed')
 for _ in 0 .. repeat_count_commit {
 	re_regex_commit.matches_string(commit_line1)
 	re_regex_commit.get_group_list()
-	re_regex_commit.get_group_by_name(commit_line1, 'type')
-	re_regex_commit.get_group_by_name(commit_line1, 'description')
+	re_regex_commit.get_group_bounds_by_name('type')
+	re_regex_commit.get_group_bounds_by_name('description')
 }
 b.measure('regex named')
 
@@ -220,7 +220,8 @@ b.measure('prantlf.re2 unnamed')
 
 for _ in 0 .. repeat_count_commit {
 	re_re2_commit.match_str(commit_line1, 0, -1, Anchor.unanchored)
-	re_re2_commit.group_by_name('test')
+	re_re2_commit.group_by_name('type')
+	re_re2_commit.group_by_name('description')
 }
 b.measure('prantlf.re2 named')
 
