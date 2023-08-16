@@ -16,11 +16,35 @@ fn testsuite_end() {
 }
 
 fn test_replace_empty() {
-	assert re.replace('', 'c', opt_none)! == ''
+	re.replace('', 'c', opt_none) or {
+		assert err is NoMatch
+		return
+	}
+	assert false
 }
 
 fn test_replace_no() {
-	assert re.replace('b', 'c', opt_none)! == 'b'
+	re.replace('b', 'c', opt_none) or {
+		assert err is NoMatch
+		return
+	}
+	assert false
+}
+
+fn test_replace_same() {
+	re.replace('a', 'a', 0) or {
+		assert err is NoReplace
+		return
+	}
+	assert false
+}
+
+fn test_replace_only_one_same() {
+	mut re_w := onig_new('(\\w)', opt_none)!
+	defer {
+		re_w.free()
+	}
+	assert re_w.replace('ab', 'a', 0)! == 'aa'
 }
 
 fn test_replace_yes() {
@@ -44,11 +68,27 @@ fn test_replace_between() {
 }
 
 fn test_replace_first_empty() {
-	assert re.replace_first('', 'c', opt_none)! == ''
+	re.replace_first('', 'c', opt_none) or {
+		assert err is NoMatch
+		return
+	}
+	assert false
 }
 
 fn test_replace_first_no() {
-	assert re.replace_first('b', 'c', opt_none)! == 'b'
+	re.replace_first('b', 'c', opt_none) or {
+		assert err is NoMatch
+		return
+	}
+	assert false
+}
+
+fn test_replace_first_same() {
+	re.replace_first('a', 'a', 0) or {
+		assert err is NoReplace
+		return
+	}
+	assert false
 }
 
 fn test_replace_first_yes() {
@@ -80,7 +120,19 @@ fn test_replace_group_within() {
 }
 
 fn test_replace_whole() {
-	assert re_grp.replace('ab', '$0', opt_replace_groups)! == 'ab'
+	assert re_grp.replace('ab', '$0c', opt_replace_groups)! == 'abc'
+}
+
+fn test_replace_group_same() {
+	mut re_w := onig_new('(\\w)', opt_none)!
+	defer {
+		re_w.free()
+	}
+	re_w.replace('ab', '$1', opt_replace_groups) or {
+		assert err is NoReplace
+		return
+	}
+	assert false
 }
 
 fn test_replace_group_out() {

@@ -1,11 +1,13 @@
 module onig
 
 import strings { Builder, new_builder }
+import prantlf.strutil { compare_str_within_nochk }
 
 pub fn (mut r RegEx) replace(s string, with string, opt u32) !string {
 	repl_grps := opt & opt_replace_groups != 0
 	rg := r.get_region()
-	mut builder := new_builder(s.len + with.len)
+	mut builder := unsafe { &Builder(nil) }
+	mut replaced := false
 	mut pos := 0
 	mut last := 0
 	stop := s.len
@@ -14,13 +16,27 @@ pub fn (mut r RegEx) replace(s string, with string, opt u32) !string {
 		res := C.onig_search(r.re, s.str, end, unsafe { s.str + pos }, end, rg, u32(opt))
 		if res >= 0 {
 			if rg.num_regs > 0 {
+				if isnil(builder) {
+					mut b := new_builder(s.len + with.len)
+					builder = &b
+				}
+				start_r := builder.len
+				pos = unsafe { rg.end[0] }
 				unsafe { builder.write_ptr(s.str + last, res - last) }
 				if repl_grps {
 					replace_with(mut builder, s, with, rg)
+					if !replaced {
+						rep := unsafe { tos(&u8(builder.data) + start_r, builder.len - start_r) }
+						if unsafe { compare_str_within_nochk(rep, s, res, pos) } != 0 {
+							replaced = true
+						}
+					}
 				} else {
+					if !replaced && unsafe { compare_str_within_nochk(with, s, res, pos) } != 0 {
+						replaced = true
+					}
 					builder.write_string(with)
 				}
-				pos = unsafe { rg.end[0] }
 				last = pos
 				if pos == stop {
 					break
@@ -30,10 +46,16 @@ pub fn (mut r RegEx) replace(s string, with string, opt u32) !string {
 			}
 		} else {
 			if res == C.ONIG_MISMATCH {
+				if pos == 0 {
+					return NoMatch{}
+				}
 				break
 			}
 			return fail_exec(res)
 		}
+	}
+	if !replaced {
+		return NoReplace{}
 	}
 	if last < stop {
 		unsafe { builder.write_ptr(s.str + last, stop - last) }
@@ -44,29 +66,37 @@ pub fn (mut r RegEx) replace(s string, with string, opt u32) !string {
 pub fn (mut r RegEx) replace_first(s string, with string, opt u32) !string {
 	repl_grps := opt & opt_replace_groups != 0
 	rg := r.get_region()
-	mut builder := new_builder(s.len + with.len)
 	stop := s.len
 	mut end := unsafe { s.str + stop }
 	res := C.onig_search(r.re, s.str, end, s.str, end, rg, u32(opt))
 	if res >= 0 {
 		if rg.num_regs > 0 {
+			mut builder := new_builder(s.len + with.len)
 			unsafe { builder.write_ptr(s.str, res) }
+			pos := unsafe { rg.end[0] }
 			if repl_grps {
+				start_r := builder.len
 				replace_with(mut builder, s, with, rg)
+				rep := unsafe { tos(&u8(builder.data) + start_r, builder.len - start_r) }
+				if unsafe { compare_str_within_nochk(rep, s, res, pos) } == 0 {
+					return NoReplace{}
+				}
 			} else {
+				if unsafe { compare_str_within_nochk(with, s, res, pos) } == 0 {
+					return NoReplace{}
+				}
 				builder.write_string(with)
 			}
-			pos := unsafe { rg.end[0] }
 			len := stop - pos
 			if len > 0 {
 				unsafe { builder.write_ptr(s.str + pos, len) }
 			}
 			return builder.str()
 		}
-		return s
+		return NoMatch{}
 	}
 	if res == C.ONIG_MISMATCH {
-		return s
+		return NoMatch{}
 	}
 	return fail_exec(res)
 }

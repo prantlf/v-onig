@@ -16,29 +16,17 @@ pub:
 	names  map[string][]int
 }
 
-[noinit]
-pub struct NoMatch {
-	Error
-}
-
-/* options */
-pub const opt_not_bol = 1 << 9
-
-pub const opt_not_eol = 1 << 10
-
-pub const opt_posix_region = 1 << 11
-
-pub const opt_check_validity_of_string = 1 << 12
-
-pub const opt_not_begin_string = 1 << 22
-
-pub const opt_not_end_string = 1 << 23
-
-pub const opt_not_begin_position = 1 << 24
-
-// pub const	opt_callback_each_match = 1 << 25
-
-pub const opt_replace_groups = 1 << 30
+pub const (
+	opt_not_bol                  = 1 << 9
+	opt_not_eol                  = 1 << 10
+	opt_posix_region             = 1 << 11
+	opt_check_validity_of_string = 1 << 12
+	opt_not_begin_string         = 1 << 22
+	opt_not_end_string           = 1 << 23
+	opt_not_begin_position       = 1 << 24
+	// opt_callback_each_match = 1 << 25
+	opt_replace_groups           = 1 << 30
+)
 
 [inline]
 pub fn (mut r RegEx) match_str(s string, opt u32) !Match {
@@ -253,10 +241,6 @@ fn (r &RegEx) create_match() Match {
 		groups: grps
 		names: names
 	}
-}
-
-fn (err NoMatch) msg() string {
-	return 'no match'
 }
 
 fn fail_exec(res int) ExecuteError {

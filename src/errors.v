@@ -16,7 +16,7 @@ pub:
 	code int
 }
 
-fn (e CompileError) msg() string {
+fn (e &CompileError) msg() string {
 	return e.msg
 }
 
@@ -28,6 +28,24 @@ pub:
 	code int
 }
 
-fn (e ExecuteError) msg() string {
+fn (e &ExecuteError) msg() string {
 	return e.msg
+}
+
+[noinit]
+pub struct NoMatch {
+	Error
+}
+
+fn (err &NoMatch) msg() string {
+	return 'no match'
+}
+
+[noinit]
+pub struct NoReplace {
+	Error
+}
+
+fn (e &NoReplace) msg() string {
+	return 'no replace'
 }
