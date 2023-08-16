@@ -12,7 +12,7 @@
 ```go
 import prantlf.onig { onig_new }
 
-pattern := r'answer (P<answer>\d+)'
+pattern := r'answer (?<answer>\d+)'
 text := 'Is the answer 42?'
 
 re := onig_new(pattern, onig.opt_none)!
@@ -300,9 +300,9 @@ See also the [semi-documentation of the API](doc/API.md). The following enums, t
     (mut r RegEx) ends_with_within(s string, from int, to int, opt u32) !bool
     (mut r RegEx) ends_with_within_nochk(s string, from int, to int, opt u32) !bool
 
-    (mut r RegEx) count_of(s string, opt u32) !Match
-    (mut r RegEx) count_of_within(s string, start int, end int, opt u32) !Match
-    (mut r RegEx) count_of_within_nochk(s string, start int, stop int, opt u32) !Match
+    (mut r RegEx) count_of(s string, opt u32) !int
+    (mut r RegEx) count_of_within(s string, start int, end int, opt u32) !int
+    (mut r RegEx) count_of_within_nochk(s string, start int, stop int, opt u32) !int
 
     (mut r RegEx) split(s string, opt u32) ![]string
     (mut r RegEx) split_first(s string, opt u32) ![]string
