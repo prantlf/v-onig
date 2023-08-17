@@ -5,6 +5,7 @@ import prantlf.strutil { compare_str_within_nochk }
 
 pub fn (mut r RegEx) replace(s string, with string, opt u32) !string {
 	repl_grps := opt & opt_replace_groups != 0
+	search_opt := opt & ~opt_replace_groups
 	rg := r.get_region()
 	mut builder := unsafe { &Builder(nil) }
 	mut replaced := false
@@ -13,7 +14,7 @@ pub fn (mut r RegEx) replace(s string, with string, opt u32) !string {
 	stop := s.len
 	end := unsafe { s.str + stop }
 	for {
-		res := C.onig_search(r.re, s.str, end, unsafe { s.str + pos }, end, rg, u32(opt))
+		res := C.onig_search(r.re, s.str, end, unsafe { s.str + pos }, end, rg, u32(search_opt))
 		if res >= 0 {
 			if rg.num_regs > 0 {
 				if isnil(builder) {
@@ -65,10 +66,11 @@ pub fn (mut r RegEx) replace(s string, with string, opt u32) !string {
 
 pub fn (mut r RegEx) replace_first(s string, with string, opt u32) !string {
 	repl_grps := opt & opt_replace_groups != 0
+	search_opt := opt & ~opt_replace_groups
 	rg := r.get_region()
 	stop := s.len
 	mut end := unsafe { s.str + stop }
-	res := C.onig_search(r.re, s.str, end, s.str, end, rg, u32(opt))
+	res := C.onig_search(r.re, s.str, end, s.str, end, rg, u32(search_opt))
 	if res >= 0 {
 		if rg.num_regs > 0 {
 			mut builder := new_builder(s.len + with.len)
