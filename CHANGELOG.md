@@ -1,5 +1,11 @@
 # Changes
 
+## [0.1.1](https://github.com/prantlf/v-onig/compare/v0.1.0...v0.1.1) (2023-08-17)
+
+### Bug Fixes
+
+* Do not pass opt_replace_groups to onig_search ([6f7c286](https://github.com/prantlf/v-onig/commit/6f7c286e3aedc36defefaf80dd5ad8de08929fa7))
+
 ## [0.1.0](https://github.com/prantlf/v-onig/compare/v0.0.2...v0.1.0) (2023-08-17)
 
 ### Features
