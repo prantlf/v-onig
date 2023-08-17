@@ -23,23 +23,23 @@ Oniguruma is significantly faster than the built-in regex, not speaking about th
 When only a match of a regex is needed, Oniguruma, PCRE and RE2 are significantly faster than the built-in regex. When the unnamed groups are needed, the times become more similar, with PCRE having an edge. When named groups are needed, the times are quite similar, with Oniguruma having the edge:
 
     ❯ ./bench/bench-all-regexes.vsh
-     SPENT    15.690 ms in regex test
-     SPENT    17.270 ms in regex unamed
-     SPENT   126.176 ms in regex named
-     SPENT    53.837 ms in regex miss
-     SPENT     5.760 ms in prantlf.onig test
-     SPENT    10.464 ms in prantlf.onig unnamed
-     SPENT   118.046 ms in prantlf.onig named
-     SPENT    32.968 ms in prantlf.onig miss
-     SPENT     5.656 ms in pcre test
-     SPENT     5.962 ms in pcre unnamed
-         N/A	pcre named
-         N/A	pcre miss
-     SPENT    10.841 ms in prantlf.pcre2 test
-     SPENT    12.543 ms in prantlf.pcre2 unnamed
-         N/A	prantlf.pcre2 named
-         N/A	prantlf.pcre2 miss
-     SPENT     2.805 ms in prantlf.re2 test
-     SPENT    19.441 ms in prantlf.re2 unnamed
-     SPENT   132.149 ms in prantlf.re2 named
-     SPENT    77.592 ms in prantlf.re2 miss
+     SPENT    84.612 ms in regex test
+     SPENT    86.953 ms in regex unamed
+     SPENT   119.182 ms in regex named
+     SPENT    56.510 ms in regex miss
+     SPENT    43.324 ms in prantlf.onig test
+     SPENT    59.620 ms in prantlf.onig unnamed
+     SPENT   102.476 ms in prantlf.onig named
+     SPENT    31.473 ms in prantlf.onig miss
+     SPENT    36.142 ms in prantlf.pcre test
+     SPENT    45.399 ms in prantlf.pcre unnamed
+     SPENT    42.996 ms in prantlf.pcre named
+     SPENT     7.313 ms in prantlf.pcre miss
+     SPENT    51.888 ms in prantlf.pcre2 test
+     SPENT   116.189 ms in prantlf.pcre2 unnamed
+     SPENT   254.120 ms in prantlf.pcre2 named
+     SPENT    19.303 ms in prantlf.pcre2 miss
+     SPENT    26.558 ms in prantlf.re2 test
+     SPENT   133.159 ms in prantlf.re2 unnamed
+     SPENT   126.388 ms in prantlf.re2 named
+     SPENT    76.110 ms in prantlf.re2 miss
