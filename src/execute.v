@@ -56,7 +56,7 @@ pub fn (mut r RegEx) match_within_nochk(s string, at int, stop int, opt u32) !Ma
 	return fail_exec(res)
 }
 
-[ilnline]
+[inline]
 pub fn (mut r RegEx) search(s string, opt u32) !Match {
 	return unsafe { r.search_within_nochk(s, 0, s.len, opt)! }
 }
@@ -82,6 +82,20 @@ pub fn (mut r RegEx) search_within_nochk(s string, start int, stop int, opt u32)
 		}
 	}
 	return fail_exec(res)
+}
+
+[inline]
+pub fn (mut r RegEx) exec(subject string, options u32) !Match {
+	return r.search(subject, options)!
+}
+
+pub fn (mut r RegEx) exec_within(subject string, start int, end int, options u32) !Match {
+	return r.search_within(subject, start, end, options)!
+}
+
+[unsafe]
+pub fn (mut r RegEx) exec_within_nochk(subject string, start int, end int, options u32) !Match {
+	return unsafe { r.search_within_nochk(subject, start, end, options)! }
 }
 
 [inline]

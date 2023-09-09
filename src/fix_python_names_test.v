@@ -35,3 +35,21 @@ fn test_two_names_2() {
 fn test_two_names_3() {
 	assert fix_python_names(' (?P<a (?P<b ') == ' (?<a (?<b '
 }
+
+fn test_has_negative() {
+	assert !has_python_names('(?<')
+}
+
+fn test_has_positive() {
+	assert has_python_names('(?P<')
+}
+
+fn test_opt_negative() {
+	if _ := fix_python_names_opt('(?<') {
+		assert false
+	}
+}
+
+fn test_opt_positive() {
+	assert fix_python_names_opt('(?P<a')! == '(?<a'
+}

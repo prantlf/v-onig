@@ -78,10 +78,12 @@ pub const (
 	syntax_oniguruma      = voidptr(&C.OnigSyntaxOniguruma)
 )
 
+[inline]
 pub fn onig_new(pat string, opt u32) !&RegEx {
 	return onig_new_custom(pat, opt, onig.encoding_ascii, onig.syntax_oniguruma)!
 }
 
+[inline]
 pub fn onig_new_utf8(pat string, opt u32) !&RegEx {
 	return onig_new_custom(pat, opt, onig.encoding_utf8, onig.syntax_oniguruma)!
 }
@@ -100,6 +102,16 @@ pub fn onig_new_custom(pat string, opt u32, enc voidptr, syntax voidptr) !&RegEx
 	return &RegEx{
 		re: re
 	}
+}
+
+[inline]
+pub fn onig_compile(source string, options u32) !&RegEx {
+	return compile(source, options)!
+}
+
+[inline]
+pub fn compile(source string, options u32) !&RegEx {
+	return onig_new_custom(source, options, onig.encoding_utf8, onig.syntax_perl_ng)!
 }
 
 pub fn (r &RegEx) free() {
