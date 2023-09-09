@@ -1,5 +1,11 @@
 # Changes
 
+## [0.2.0](https://github.com/prantlf/v-onig/compare/v0.1.1...v0.2.0) (2023-09-09)
+
+### Features
+
+* Add PCRE-compatible functions ([d4ebbbc](https://github.com/prantlf/v-onig/commit/d4ebbbccbef4ee8a87fded20fb6dde5b5440bbcb))
+
 ## [0.1.1](https://github.com/prantlf/v-onig/compare/v0.1.0...v0.1.1) (2023-08-17)
 
 ### Bug Fixes
