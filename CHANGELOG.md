@@ -1,5 +1,11 @@
 # Changes
 
+## [0.2.1](https://github.com/prantlf/v-onig/compare/v0.2.0...v0.2.1) (2023-09-17)
+
+### Bug Fixes
+
+* Support build on windows ([237e660](https://github.com/prantlf/v-onig/commit/237e660cda56da80c1fb2d8a8ab1e6c3e28cfc0c))
+
 ## [0.2.0](https://github.com/prantlf/v-onig/compare/v0.1.1...v0.2.0) (2023-09-09)
 
 ### Features
