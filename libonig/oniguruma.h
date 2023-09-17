@@ -33,6 +33,8 @@
 extern "C" {
 #endif
 
+#define ONIG_STATIC
+
 #define ONIGURUMA
 #define ONIGURUMA_VERSION_MAJOR   6
 #define ONIGURUMA_VERSION_MINOR   9

@@ -1,21 +1,21 @@
 module onig
 
 #flag -I @VROOT/libonig
-#flag @VROOT/libonig/regparse.o
-#flag @VROOT/libonig/regcomp.o
-#flag @VROOT/libonig/regexec.o
-#flag @VROOT/libonig/regenc.o
-#flag @VROOT/libonig/regerror.o
-#flag @VROOT/libonig/regsyntax.o
-#flag @VROOT/libonig/regtrav.o
-#flag @VROOT/libonig/st.o
-#flag @VROOT/libonig/unicode.o
-#flag @VROOT/libonig/unicode_unfold_key.o
-#flag @VROOT/libonig/unicode_fold1_key.o
-#flag @VROOT/libonig/unicode_fold2_key.o
-#flag @VROOT/libonig/unicode_fold3_key.o
-#flag @VROOT/libonig/ascii.o
-#flag @VROOT/libonig/utf8.o
+#flag @VROOT/libonig/regparse.c
+#flag @VROOT/libonig/regcomp.c
+#flag @VROOT/libonig/regexec.c
+#flag @VROOT/libonig/regenc.c
+#flag @VROOT/libonig/regerror.c
+#flag @VROOT/libonig/regsyntax.c
+#flag @VROOT/libonig/regtrav.c
+#flag @VROOT/libonig/st.c
+#flag @VROOT/libonig/unicode.c
+#flag @VROOT/libonig/unicode_unfold_key.c
+#flag @VROOT/libonig/unicode_fold1_key.c
+#flag @VROOT/libonig/unicode_fold2_key.c
+#flag @VROOT/libonig/unicode_fold3_key.c
+#flag @VROOT/libonig/ascii.c
+#flag @VROOT/libonig/utf8.c
 #include "oniguruma.h"
 // #include "regint.h"
 
