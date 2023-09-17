@@ -11,7 +11,7 @@ See also the [documentation of the Oniguruma syntax](doc/RE.md) and the [Unicode
 
 ## Synopsis
 
-```go
+```v
 import prantlf.onig { onig_new }
 
 pattern := r'answer (?<answer>\d+)'
@@ -70,7 +70,7 @@ For the syntax of the regular expression patterns, see the [quick reference] or 
 
 A regular expression pattern has to be compiled at first:
 
-```go
+```v
 import prantlf.onig { onig_new, onig_new_utf8, onig_new_custom }
 onig_new(pat string, opt u32) !&RegEx       // encoding_ascii and syntax_oniguruma
 onig_new_utf8(pat string, opt u32) !&RegEx  // encoding_utf8 and syntax_oniguruma
@@ -79,7 +79,7 @@ onig_new_custom(pat string, opt u32, enc voidptr, syntax voidptr) !&RegEx
 
 API compatible with PCRE, just using the Oniguruma options. Both synonymous methods share the same functionality:
 
-```go
+```v
 import prantlf.onig { onig_compile }
 onig_compile(source string, options u32) !&RegEx  // encoding_ut8 and syntax_perl_ng
 compile(source string, options u32) !&RegEx       // the same as above
@@ -114,7 +114,7 @@ The following options can be applied. Combine multiple options together with the
 
 If the compilation fails, an error will be returned:
 
-```go
+```v
 struct CompileError {
   msg    string  // the error message
   code   int     // the error code
@@ -123,14 +123,14 @@ struct CompileError {
 
 Don't forget to free the regular expression object when you do not need it any more:
 
-```go
+```v
 (r &RegEx) free()
 defer { re.free() }
 ```
 
 If the patterns contains named capruring groups using the Python syntax - `(?P<name>...)` - you can replace them with the more standard syntax, as known from Oniguruma, Perl, JavaScript etc. - `(?<name>...)` by these functions:
 
-```go
+```v
 has_python_names(pat string) bool
 fix_python_names(pat string) string
 fix_python_names_opt(pat string) ?string
@@ -140,13 +140,13 @@ fix_python_names_opt(pat string) ?string
 
 After compiling, the regular expression can be used for matching and searching:
 
-```go
+```v
 (mut r RegEx) match_str(s string, opt u32) !Match
 (mut r RegEx) match_within(s string, at int, end int, opt u32) !Match
 (mut r RegEx) match_within_nochk(s string, at int, stop int, opt u32) !Match
 ```
 
-```go
+```v
 (mut r RegEx) search(s string, opt u32) !Match
 (mut r RegEx) search_within(s string, start int, end int, opt u32) !Match
 (mut r RegEx) search_within_nochk(s string, start int, stop int, opt u32) !Match
@@ -154,7 +154,7 @@ After compiling, the regular expression can be used for matching and searching:
 
 API compatible with PCRE, just using the Oniguruma options:
 
-```go
+```v
 (mut r RegEx) exec(subject string, options u32) !Match
 (mut r RegEx) exec_within(subject string, start int, end int, options u32) !Match
 (mut r RegEx) exec_within_nochk(subject string, start int, end int, options u32) !Match
@@ -179,7 +179,7 @@ The following options can be applied. Combine multiple options together with the
 
 If the execution succeeds, an object with information about the match will be returned:
 
-```go
+```v
 struct Group {
 	start int
 	end   int
@@ -193,7 +193,7 @@ struct Match {
 
 Capturing groups can be obtained by the following methods, which return `none`, if the group number is invalid. The group number `0` (zero) means the whole match:
 
-```go
+```v
 (m &Match) group_by_index(idx int) ?Group
 (m &Match) group_by_name(name string) ?Group
 (m &Match) groups_by_name(name string) ?[]Group
@@ -204,13 +204,13 @@ Capturing groups can be obtained by the following methods, which return `none`, 
 
 If the execution cannot match the pattern, a special error will be returned:
 
-```go
+```v
 struct NoMatch {}
 ```
 
 If the execution fails from other reasons, a general error will be returned:
 
-```go
+```v
 struct ExecuteError {
   msg  string
   code int
@@ -223,7 +223,7 @@ The API consists of two parts - basic compilation and execution of a regular exp
 
 ### Searching
 
-```go
+```v
 (mut r RegEx) search_all(s string, opt u32) ![]Match
 (mut r RegEx) search_all_within(s string, start int, end int, opt u32) ![]Match
 (mut r RegEx) search_all_within_nochk(s string, start int, stop int, opt u32) ![]Match
@@ -269,20 +269,20 @@ The API consists of two parts - basic compilation and execution of a regular exp
 
 Replace either all occurrences or only the first one matching the pattern of the regular expression:
 
-```go
+```v
 (mut r RegEx) replace(s string, with string, opt u32) !string
 (mut r RegEx) replace_first(s string, with string, opt u32) !string
 ```
 
 If the regular expression doesn't match the pattern, a special error will be returned:
 
-```go
+```v
 struct NoMatch {}
 ```
 
 If the regular expression matches, but the replacement string is the same as the found string, so the replacing wouldn't change anything, a special error will be returned:
 
-```go
+```v
 struct NoReplace {}
 ```
 
@@ -290,14 +290,14 @@ struct NoReplace {}
 
 Split the input string by the regular expression and return the remaining parts in a string array:
 
-```go
+```v
 (mut r RegEx) split(s string, opt u32) ![]string
 (mut r RegEx) split_first(s string, opt u32) ![]string
 ```
 
 Split the input string by the regular expression and return all parts, both remaining and splitting, in a string array:
 
-```go
+```v
 (mut r RegEx) chop(s string, opt u32) ![]string
 (mut r RegEx) chop_first(s string, opt u32) ![]string
 ```
@@ -343,11 +343,11 @@ Predefined or customised syntaxes can be specified when calling `onig_new_custom
 
 An existing syntax can be cloned by the following method and customised by the constants usable in the types below:
 
-```go
+```v
 Syntax.clone(orig voidptr) &Syntax
 ```
 
-```go
+```v
 struct MetaCharTable {
   esc              u32
   anychar          u32
