@@ -120,6 +120,7 @@ pub const (
 	syn_variable_len_look_behind        = 1 << 11 // (?<=a+|..)
 	syn_python                          = 1 << 12 // \UHHHHHHHH
 	syn_whole_options                   = 1 << 13 // (?Ie)
+	syn_bre_anchor_at_edge_of_subexp    = 1 << 14 // \(^abc$\)
 )
 
 // syntax (behavior) in char class [...]

@@ -93,6 +93,7 @@ not_eol             Do not regard the (end) as the end of a line and the end of 
 not_begin_string    Do not regard the beginning of the (str) as the beginning of a string  (* fail \A)
 not_end_string      Do not regard the (end) as a string endpoint  (* fail \z, \Z)
 not_begin_position  Do not regard the (start) as start position of search  (* fail \G)
+match_whole_string  Try to match the whole of (str), rather than returning after the first match is found
 ```
 
 ## (RegEx) match_str(str string, start int, end int, option u32) !Match
@@ -110,6 +111,7 @@ not_eol             Do not regard the (end) as the end of a line and the end of 
 not_begin_string    Do not regard the beginning of the (str) as the beginning of a string  (* fail \A)
 not_end_string      Do not regard the (end) as a string endpoint  (* fail \z, \Z)
 not_begin_position  Do not regard the (start) as start position of search  (* fail \G)
+match_whole_string  Try to match the whole of (str), rather than returning after the first match is found
 ```
 
 ## (RegEx) matches(str string, start int, end int, option u32) !bool
@@ -127,6 +129,7 @@ not_eol             Do not regard the (end) as the end of a line and the end of 
 not_begin_string    Do not regard the beginning of the (str) as the beginning of a string  (* fail \A)
 not_end_string      Do not regard the (end) as a string endpoint  (* fail \z, \Z)
 not_begin_position  Do not regard the (start) as start position of search  (* fail \G)
+match_whole_string  Try to match the whole of (str), rather than returning after the first match is found
 ```
 
 <!-- ## (RegEx) group_texts_by_name(name string) ?[]int

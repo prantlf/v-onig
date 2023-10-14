@@ -17,15 +17,16 @@ pub:
 }
 
 pub const (
-	opt_not_bol                  = 1 << 9
-	opt_not_eol                  = 1 << 10
-	opt_posix_region             = 1 << 11
-	opt_check_validity_of_string = 1 << 12
-	opt_not_begin_string         = 1 << 22
-	opt_not_end_string           = 1 << 23
-	opt_not_begin_position       = 1 << 24
+	opt_not_bol            = 1 << 9
+	opt_not_eol            = 1 << 10
+	// opt_posix_region             = 1 << 11
+	// opt_check_validity_of_string = 1 << 12
+	opt_not_begin_string   = 1 << 22
+	opt_not_end_string     = 1 << 23
+	opt_not_begin_position = 1 << 24
 	// opt_callback_each_match = 1 << 25
-	opt_replace_groups           = 1 << 30
+	opt_match_whole_string = 1 << 26
+	opt_replace_groups     = 1 << 30
 )
 
 [inline]

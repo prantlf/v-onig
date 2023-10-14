@@ -61,10 +61,10 @@ For the syntax of the regular expression patterns, see the [quick reference] or 
 
 ### Initialise
 
+Calling the initialisation is optional If `onig_init` is not called, it will be done when the first regular expression is compiled and encodings `encoding_ascii` and `encoding_utf8` will be enabled.
 
     onig_init(encs ...voidptr) !
     onig_end()
-
 
 ### Compile
 
@@ -166,16 +166,18 @@ https://github.com/kkos/oniguruma/blob/master/doc/RE
 
 The following options can be applied. Combine multiple options together with the `|` (binary OR) operator:
 
-    not_bol             Do not regard the beginning of the (str) as the beginning
-                        of the line and the beginning of the string
-    not_eol             Do not regard the (end) as the end of a line
-                        and the end of a string
-    not_begin_string    Do not regard the beginning of the (str)
-                        as the beginning of a string  (* fail \A)
-    not_end_string      Do not regard the (end) as a string endpoint
-                        (* fail \z, \Z)
-    not_begin_position  Do not regard the (start) as start position of search
-                        (* fail \G)
+    opt_not_bol             Do not regard the beginning of the (str) as the beginning
+                            of the line and the beginning of the string
+    opt_not_eol             Do not regard the (end) as the end of a line
+                            and the end of a string
+    opt_not_begin_string    Do not regard the beginning of the (str)
+                            as the beginning of a string  (* fail \A)
+    opt_not_end_string      Do not regard the (end) as a string endpoint
+                            (* fail \z, \Z)
+    opt_not_begin_position  Do not regard the (start) as start position of search
+                            (* fail \G)
+    opt_match_whole_string  Try to match the whole of (str), rather than returning
+                            after the first match is found
 
 If the execution succeeds, an object with information about the match will be returned:
 
@@ -447,6 +449,7 @@ struct Syntax {
     syn_variable_len_look_behind
     syn_python
     syn_whole_options
+    syn_bre_anchor_at_edge_of_subexp
     syn_not_newline_in_negative_cc
     syn_backslash_escape_in_cc
     syn_allow_empty_range_in_cc

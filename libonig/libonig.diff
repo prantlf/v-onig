@@ -1,32 +1,29 @@
-Only in src.orig: big5.c
-Only in src.orig: cp1251.c
-Only in src.orig: euc_jp.c
-Only in src.orig: euc_jp_prop.c
-Only in src.orig: euc_kr.c
-Only in src.orig: euc_tw.c
-Only in src.orig: gb18030.c
-Only in src.orig: iso8859_1.c
-Only in src.orig: iso8859_10.c
-Only in src.orig: iso8859_11.c
-Only in src.orig: iso8859_13.c
-Only in src.orig: iso8859_14.c
-Only in src.orig: iso8859_15.c
-Only in src.orig: iso8859_16.c
-Only in src.orig: iso8859_2.c
-Only in src.orig: iso8859_3.c
-Only in src.orig: iso8859_4.c
-Only in src.orig: iso8859_5.c
-Only in src.orig: iso8859_6.c
-Only in src.orig: iso8859_7.c
-Only in src.orig: iso8859_8.c
-Only in src.orig: iso8859_9.c
-Only in src.orig: koi8.c
-Only in src.orig: koi8_r.c
-
-diff -u src.orig/oniguruma.h src/oniguruma.h
---- src.orig/oniguruma.h	2022-04-15 16:00:07
-+++ src/oniguruma.h	2023-08-11 14:14:08
-@@ -155,6 +155,7 @@
+diff -u ./onig-6.9.9/src/config.h ./config.h
+--- ./onig-6.9.9/src/config.h	2023-10-14 19:58:22
++++ ./config.h	2023-10-14 20:17:11
+@@ -11,7 +11,9 @@
+ 
+ /* Define to 1 if you have <alloca.h> and it should be used (not on Ultrix).
+    */
++#ifndef _WIN32
+ #define HAVE_ALLOCA_H  1
++#endif
+ 
+ /* Define to 1 if you have the <stdint.h> header file. */
+ #define HAVE_STDINT_H  1
+diff -u ./onig-6.9.9/src/oniguruma.h ./oniguruma.h
+--- ./onig-6.9.9/src/oniguruma.h	2023-10-07 16:41:39
++++ ./oniguruma.h	2023-10-14 20:21:57
+@@ -33,6 +33,8 @@
+ extern "C" {
+ #endif
+ 
++#define ONIG_STATIC
++
+ #define ONIGURUMA
+ #define ONIGURUMA_VERSION_MAJOR   6
+ #define ONIGURUMA_VERSION_MINOR   9
+@@ -155,6 +157,7 @@
  typedef OnigEncodingType* OnigEncoding;
  
  ONIG_EXTERN OnigEncodingType OnigEncodingASCII;
@@ -34,7 +31,7 @@ diff -u src.orig/oniguruma.h src/oniguruma.h
  ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_1;
  ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_2;
  ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_3;
-@@ -170,7 +171,9 @@
+@@ -170,7 +173,9 @@
  ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_14;
  ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_15;
  ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_16;
@@ -44,7 +41,7 @@ diff -u src.orig/oniguruma.h src/oniguruma.h
  ONIG_EXTERN OnigEncodingType OnigEncodingUTF16_BE;
  ONIG_EXTERN OnigEncodingType OnigEncodingUTF16_LE;
  ONIG_EXTERN OnigEncodingType OnigEncodingUTF32_BE;
-@@ -185,8 +188,10 @@
+@@ -185,8 +190,10 @@
  ONIG_EXTERN OnigEncodingType OnigEncodingCP1251;
  ONIG_EXTERN OnigEncodingType OnigEncodingBIG5;
  ONIG_EXTERN OnigEncodingType OnigEncodingGB18030;
@@ -55,7 +52,7 @@ diff -u src.orig/oniguruma.h src/oniguruma.h
  #define ONIG_ENCODING_ISO_8859_1   (&OnigEncodingISO_8859_1)
  #define ONIG_ENCODING_ISO_8859_2   (&OnigEncodingISO_8859_2)
  #define ONIG_ENCODING_ISO_8859_3   (&OnigEncodingISO_8859_3)
-@@ -202,7 +207,9 @@
+@@ -202,7 +209,9 @@
  #define ONIG_ENCODING_ISO_8859_14  (&OnigEncodingISO_8859_14)
  #define ONIG_ENCODING_ISO_8859_15  (&OnigEncodingISO_8859_15)
  #define ONIG_ENCODING_ISO_8859_16  (&OnigEncodingISO_8859_16)
@@ -65,7 +62,7 @@ diff -u src.orig/oniguruma.h src/oniguruma.h
  #define ONIG_ENCODING_UTF16_BE     (&OnigEncodingUTF16_BE)
  #define ONIG_ENCODING_UTF16_LE     (&OnigEncodingUTF16_LE)
  #define ONIG_ENCODING_UTF32_BE     (&OnigEncodingUTF32_BE)
-@@ -217,6 +224,7 @@
+@@ -217,6 +226,7 @@
  #define ONIG_ENCODING_CP1251       (&OnigEncodingCP1251)
  #define ONIG_ENCODING_BIG5         (&OnigEncodingBIG5)
  #define ONIG_ENCODING_GB18030      (&OnigEncodingGB18030)
@@ -73,7 +70,7 @@ diff -u src.orig/oniguruma.h src/oniguruma.h
  
  #define ONIG_ENCODING_UNDEF    ((OnigEncoding )0)
  
-@@ -801,6 +809,8 @@
+@@ -803,6 +813,8 @@
  ONIG_EXTERN
  int onig_initialize P_((OnigEncoding encodings[], int number_of_encodings));
  /* onig_init(): deprecated function. Use onig_initialize(). */
@@ -82,11 +79,10 @@ diff -u src.orig/oniguruma.h src/oniguruma.h
  ONIG_EXTERN
  int onig_init P_((void));
  ONIG_EXTERN
-
-diff -u src.orig/regcomp.c src/regcomp.c
---- src.orig/regcomp.c	2022-04-04 15:11:18
-+++ src/regcomp.c	2023-07-29 20:24:20
-@@ -7709,6 +7709,12 @@
+diff -u ./onig-6.9.9/src/regcomp.c ./regcomp.c
+--- ./onig-6.9.9/src/regcomp.c	2023-10-10 16:30:30
++++ ./regcomp.c	2023-10-14 20:23:24
+@@ -7778,6 +7778,12 @@
    return ONIG_NORMAL;
  }
  
@@ -99,12 +95,9 @@ diff -u src.orig/regcomp.c src/regcomp.c
  typedef struct EndCallListItem {
    struct EndCallListItem* next;
    void (*func)(void);
-Only in src.orig: regext.c
-Only in src.orig: reggnu.c
-
-diff -u src.orig/regint.h src/regint.h
---- src.orig/regint.h	2022-04-12 04:18:32
-+++ src/regint.h	2023-07-30 10:16:53
+diff -u ./onig-6.9.9/src/regint.h ./regint.h
+--- ./onig-6.9.9/src/regint.h	2023-05-20 08:08:34
++++ ./regint.h	2023-10-14 20:25:08
 @@ -59,11 +59,13 @@
  
  /* config */
@@ -114,7 +107,7 @@ diff -u src.orig/regint.h src/regint.h
  #define USE_CALL
  #define USE_CALLOUT
 -#define USE_BACKREF_WITH_LEVEL        /* \k<name+n>, \k<name-n> */
-+#define USE_BACKREF_WITH_LEVEL        \k<name+n>, \k<name-n>
++#define USE_BACKREF_WITH_LEVEL         \k<name+n>, \k<name-n>
  #define USE_WHOLE_OPTIONS
 +*/
  #define USE_RIGID_CHECK_CAPTURES_IN_EMPTY_REPEAT        /* /(?:()|())*\2/ */
@@ -130,10 +123,3 @@ diff -u src.orig/regint.h src/regint.h
  #define USE_VARIABLE_META_CHARS
  #define USE_FIND_LONGEST_SEARCH_ALL_OF_RANGE
  /* #define USE_REPEAT_AND_EMPTY_CHECK_LOCAL_VAR */
-
-Only in src.orig: sjis.c
-Only in src.orig: sjis_prop.c
-Only in src.orig: utf16_be.c
-Only in src.orig: utf16_le.c
-Only in src.orig: utf32_be.c
-Only in src.orig: utf32_le.c
