@@ -1,5 +1,11 @@
 # Changes
 
+## [0.3.0](https://github.com/prantlf/v-onig/compare/v0.2.1...v0.3.0) (2023-10-15)
+
+### Features
+
+* Upgrade oniguruma to 6.9.9 ([aaddfba](https://github.com/prantlf/v-onig/commit/aaddfba83526524193a297c773250ef77693b884))
+
 ## [0.2.1](https://github.com/prantlf/v-onig/compare/v0.2.0...v0.2.1) (2023-09-17)
 
 ### Bug Fixes
