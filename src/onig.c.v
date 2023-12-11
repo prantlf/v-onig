@@ -1,5 +1,6 @@
 module onig
 
+#flag -D ONIG_STATIC
 #flag -I @VROOT/libonig
 #flag @VROOT/libonig/regparse.c
 #flag @VROOT/libonig/regcomp.c
