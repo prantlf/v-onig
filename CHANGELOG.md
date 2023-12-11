@@ -1,5 +1,11 @@
 # Changes
 
+## [0.3.1](https://github.com/prantlf/v-onig/compare/v0.3.0...v0.3.1) (2023-12-11)
+
+### Bug Fixes
+
+* Adapt for V langage changes ([b50b6ed](https://github.com/prantlf/v-onig/commit/b50b6ed53796dcf5fcc912ac4fae5d000b32a5a9))
+
 ## [0.3.0](https://github.com/prantlf/v-onig/compare/v0.2.1...v0.3.0) (2023-10-15)
 
 ### Features
