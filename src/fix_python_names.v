@@ -14,7 +14,7 @@ pub fn fix_python_names(pat string) string {
 	return fix_python_names_opt(pat) or { pat }
 }
 
-[direct_array_access]
+@[direct_array_access]
 pub fn fix_python_names_opt(pat string) ?string {
 	mut name := pat.index(onig.name_opening) or { return none }
 

@@ -2,14 +2,14 @@ module onig
 
 import prantlf.strutil { check_bounds_strict }
 
-[noinit]
+@[noinit]
 pub struct Group {
 pub:
 	start int
 	end   int
 }
 
-[noinit]
+@[noinit]
 pub struct Match {
 pub:
 	groups []Group
@@ -29,7 +29,7 @@ pub const (
 	opt_replace_groups     = 1 << 30
 )
 
-[inline]
+@[inline]
 pub fn (mut r RegEx) match_str(s string, opt u32) !Match {
 	return unsafe { r.match_within_nochk(s, 0, s.len, opt)! }
 }
@@ -39,7 +39,7 @@ pub fn (mut r RegEx) match_within(s string, at int, end int, opt u32) !Match {
 	return unsafe { r.match_within_nochk(s, at, stop, opt)! }
 }
 
-[unsafe]
+@[unsafe]
 pub fn (mut r RegEx) match_within_nochk(s string, at int, stop int, opt u32) !Match {
 	if at == stop {
 		return NoMatch{}
@@ -57,7 +57,7 @@ pub fn (mut r RegEx) match_within_nochk(s string, at int, stop int, opt u32) !Ma
 	return fail_exec(res)
 }
 
-[inline]
+@[inline]
 pub fn (mut r RegEx) search(s string, opt u32) !Match {
 	return unsafe { r.search_within_nochk(s, 0, s.len, opt)! }
 }
@@ -67,7 +67,7 @@ pub fn (mut r RegEx) search_within(s string, start int, end int, opt u32) !Match
 	return unsafe { r.search_within_nochk(s, start, stop, opt)! }
 }
 
-[unsafe]
+@[unsafe]
 pub fn (mut r RegEx) search_within_nochk(s string, start int, stop int, opt u32) !Match {
 	if start == stop {
 		return NoMatch{}
@@ -85,7 +85,7 @@ pub fn (mut r RegEx) search_within_nochk(s string, start int, stop int, opt u32)
 	return fail_exec(res)
 }
 
-[inline]
+@[inline]
 pub fn (mut r RegEx) exec(subject string, options u32) !Match {
 	return r.search(subject, options)!
 }
@@ -94,12 +94,12 @@ pub fn (mut r RegEx) exec_within(subject string, start int, end int, options u32
 	return r.search_within(subject, start, end, options)!
 }
 
-[unsafe]
+@[unsafe]
 pub fn (mut r RegEx) exec_within_nochk(subject string, start int, end int, options u32) !Match {
 	return unsafe { r.search_within_nochk(subject, start, end, options)! }
 }
 
-[inline]
+@[inline]
 pub fn (mut r RegEx) search_all(s string, opt u32) ![]Match {
 	return unsafe { r.search_all_within_nochk(s, 0, s.len, opt)! }
 }
@@ -109,7 +109,7 @@ pub fn (mut r RegEx) search_all_within(s string, start int, end int, opt u32) ![
 	return unsafe { r.search_all_within_nochk(s, start, stop, opt)! }
 }
 
-[unsafe]
+@[unsafe]
 pub fn (mut r RegEx) search_all_within_nochk(s string, start int, end int, opt u32) ![]Match {
 	if start == end {
 		return NoMatch{}

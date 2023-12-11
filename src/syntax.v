@@ -1,6 +1,6 @@
 module onig
 
-[noinit]
+@[noinit]
 pub struct MetaCharTable {
 mut:
 	esc              u32
@@ -11,7 +11,7 @@ mut:
 	anychar_anytime  u32
 }
 
-[noinit]
+@[noinit]
 pub struct Syntax {
 mut:
 	op              u32

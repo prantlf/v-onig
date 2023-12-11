@@ -7,7 +7,7 @@ const repeat_count = 100_000
 
 const name_opening = '(?P<'
 
-[direct_array_access]
+@[direct_array_access]
 fn fix_python_names_append(pat string) string {
 	mut name := pat.index(name_opening) or { return pat }
 

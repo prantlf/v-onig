@@ -8,7 +8,7 @@ pub enum ErrorResult {
 	// abort = -3
 }
 
-[noinit]
+@[noinit]
 pub struct CompileError {
 	Error
 pub:
@@ -20,7 +20,7 @@ fn (e &CompileError) msg() string {
 	return e.msg
 }
 
-[noinit]
+@[noinit]
 pub struct ExecuteError {
 	Error
 pub:
@@ -32,7 +32,7 @@ fn (e &ExecuteError) msg() string {
 	return e.msg
 }
 
-[noinit]
+@[noinit]
 pub struct NoMatch {
 	Error
 }
@@ -41,7 +41,7 @@ fn (err &NoMatch) msg() string {
 	return 'no match'
 }
 
-[noinit]
+@[noinit]
 pub struct NoReplace {
 	Error
 }

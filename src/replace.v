@@ -103,7 +103,7 @@ pub fn (mut r RegEx) replace_first(s string, with string, opt u32) !string {
 	return fail_exec(res)
 }
 
-[direct_array_access]
+@[direct_array_access]
 fn replace_with(mut builder Builder, s string, with string, rg &C.OnigRegion) {
 	mut from := with.index_u8(`$`)
 	if from < 0 {

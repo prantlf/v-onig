@@ -19,7 +19,7 @@ module onig
 #include "oniguruma.h"
 // #include "regint.h"
 
-[typedef]
+@[typedef]
 struct C.OnigRegion {
 	allocated    int
 	num_regs     int
@@ -28,14 +28,14 @@ struct C.OnigRegion {
 	history_root &voidptr = unsafe { nil }
 }
 
-[typedef]
+@[typedef]
 struct C.OnigErrorInfo {
 	enc     voidptr
 	par     &u8 = unsafe { nil }
 	par_end &u8 = unsafe { nil }
 }
 
-[typedef]
+@[typedef]
 struct C.OnigEncoding {
 	mbc_enc_len                voidptr
 	name                       &u8 = unsafe { nil }
@@ -61,7 +61,7 @@ struct C.OnigEncoding {
 	index                      int
 }
 
-[typedef]
+@[typedef]
 struct C.OnigMetaCharTable {
 	esc              u32
 	anychar          u32
@@ -71,7 +71,7 @@ struct C.OnigMetaCharTable {
 	anychar_anytime  u32
 }
 
-[typedef]
+@[typedef]
 struct C.OnigSyntax {
 	op              u32
 	op2             u32
@@ -80,13 +80,13 @@ struct C.OnigSyntax {
 	meta_char_table C.OnigMetaCharTable
 }
 
-[typedef]
+@[typedef]
 struct C.RepeatRange {
 	lower int
 	upper int
 }
 
-[typedef]
+@[typedef]
 struct C.RegexExt {
 	pat     &u8 = unsafe { nil }
 	pat_end &u8 = unsafe { nil }
@@ -96,7 +96,7 @@ struct C.RegexExt {
 	// callout_list       voidptr
 }
 
-[typedef]
+@[typedef]
 struct C.OnigRegex {
 	ops             voidptr
 	ocs             &int = unsafe { nil }
