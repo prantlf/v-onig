@@ -1,5 +1,11 @@
 # Changes
 
+## [0.3.2](https://github.com/prantlf/v-onig/compare/v0.3.1...v0.3.2) (2023-12-12)
+
+### Bug Fixes
+
+* Use flags to force static linking instead of config define ([0da2c22](https://github.com/prantlf/v-onig/commit/0da2c22f19cdde9d809455ee65d261da9465e870))
+
 ## [0.3.1](https://github.com/prantlf/v-onig/compare/v0.3.0...v0.3.1) (2023-12-11)
 
 ### Bug Fixes
