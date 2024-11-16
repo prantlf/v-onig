@@ -147,15 +147,15 @@ fn test_group_by_index() {
 	m := re.match_str(s, opt_none)!
 	assert m.group_by_index(0)? == Group{
 		start: 0
-		end: 11
+		end:   11
 	}
 	assert m.group_by_index(1)? == Group{
 		start: 1
-		end: 9
+		end:   9
 	}
 	assert m.group_by_index(2)? == Group{
 		start: 10
-		end: 11
+		end:   11
 	}
 	m.group_by_index(3) or { return }
 	assert false
@@ -185,7 +185,7 @@ fn test_group_text_by_name_both() {
 	if g := m.group_by_name('test') {
 		assert g == Group{
 			start: 1
-			end: 9
+			end:   9
 		}
 	} else {
 		assert false
@@ -201,11 +201,11 @@ fn test_group_text_by_name_both() {
 		assert g == [
 			Group{
 				start: 1
-				end: 9
+				end:   9
 			},
 			Group{
 				start: 10
-				end: 11
+				end:   11
 			},
 		]
 	} else {
@@ -230,7 +230,7 @@ fn test_group_text_by_name_either() {
 	if g := m.group_by_name('test') {
 		assert g == Group{
 			start: 1
-			end: 11
+			end:   11
 		}
 	} else {
 		assert false
@@ -246,7 +246,7 @@ fn test_group_text_by_name_either() {
 		assert g == [
 			Group{
 				start: 1
-				end: 11
+				end:   11
 			},
 		]
 	} else {

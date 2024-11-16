@@ -3,7 +3,7 @@ module onig
 const name_opening = '(?P<'
 
 pub fn has_python_names(pat string) bool {
-	return if _ := pat.index(onig.name_opening) {
+	return if _ := pat.index(name_opening) {
 		true
 	} else {
 		false
@@ -16,7 +16,7 @@ pub fn fix_python_names(pat string) string {
 
 @[direct_array_access]
 pub fn fix_python_names_opt(pat string) ?string {
-	mut name := pat.index(onig.name_opening) or { return none }
+	mut name := pat.index(name_opening) or { return none }
 
 	mut from := &u8(pat.str)
 	end := unsafe { from + pat.len }
