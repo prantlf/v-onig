@@ -1,5 +1,11 @@
 # Changes
 
+## [0.3.3](https://github.com/prantlf/v-onig/compare/v0.3.2...v0.3.3) (2024-11-16)
+
+### Bug Fixes
+
+* Fix sources for the new V compiler ([8332021](https://github.com/prantlf/v-onig/commit/8332021db30396fa0fecd1c5a1528f0e5a95b71e))
+
 ## [0.3.2](https://github.com/prantlf/v-onig/compare/v0.3.1...v0.3.2) (2023-12-12)
 
 ### Bug Fixes
